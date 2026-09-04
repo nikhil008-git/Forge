@@ -1,1 +1,17 @@
-/target
+/target/
+**/*.rs.bk
+*.pdb
+
+# Local state from the CLI (layer 1)
+forge.json
+*.forge.json
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Secrets (auth + Postgres land in later layers)
+.env
+.env.*
+!.env.example
