@@ -10,8 +10,6 @@ register URL  →  ingest JSON  →  pending delivery  →  worker POSTs it late
 
 Layer 1 is a CLI only. Nothing is POSTed yet. State lives in `forge.json`.
 
-Later layers (Axum, Postgres, auth, workers) stay local — they are not in this repo.
-
 ---
 
 ## What the project is about
