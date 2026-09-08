@@ -1,49 +1,48 @@
 // Serialize → Rust → JSON
 // Deserialize → JSON → Rust
 // Value → arbitrary JSON data 
-use serde::{Deserializa, Serialize}
+use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-#derive(Debug,Clone, Serialize, Deserialize);
-pub struct Endpoint{ 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Endpoint {
     pub id: String,
     pub url: String,
-
 }
 
-#derive(Debug, Clone, Serialize, Deserialize);
-pub struct Event { 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Event {
     pub id: String,
     pub endpoint_id: String,
-    pub paylaod: Value, // {"name": "Nikhil", "age": 21} or ["hello", "world"] or "hello"
+    pub payload: Value, // {"name": "Nikhil", "age": 21} or ["hello", "world"] or "hello"
 }
 
-//for enum of payload type
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
-pub enum PayloadType {
+pub enum DeliveryStatus {
     Pending,
     Running,
     Succeeded,
     Failed,
 }
 
-#derive(Debug, Clone, Serialize, Deserialize);
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Delivery {
     pub id: String,
     pub event_id: String,
     pub endpoint_id: String,
     pub status: DeliveryStatus,
-    pub attempt: u32,
+    pub attempts: u32,
 }
 
-impl Endpoint { 
-    pub fn new( url : impl Into<String>) -> Self {
-        Self {  
-            id: format!("ep_{}", url.into()), // here like ep_1234567890 smthg will be generated
-            url: url.into(), // into added to the object.
+impl Endpoint {
+    pub fn new(url: impl Into<String>) -> Self {
+        let url = url.into();
+        Self {
+            id: format!("ep_{}", unique()), // here like ep_1234567890 smthg will be generated
+            url,
         }
-}
+    }
 }
 
 impl Event {

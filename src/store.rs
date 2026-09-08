@@ -4,11 +4,11 @@
 use std::fs;
 use std::path::PathBuf;
 
-user serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-// imported the structs from the models.rs file
-use crate::models::{Delivery, Endpoint, Event};
+// imported the structs from the model.rs file
+use crate::model::{Delivery, Endpoint, Event};
 #[derive(Debug, Default, Serialize, Deserialize)]
 struct State {
     endpoints: Vec<Endpoint>,
