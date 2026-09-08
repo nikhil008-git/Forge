@@ -1,3 +1,6 @@
+# Local learning plan — not in git
+BUILD.md
+
 /target/
 **/*.rs.bk
 *.pdb
